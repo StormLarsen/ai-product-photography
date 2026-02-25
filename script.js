@@ -108,6 +108,27 @@ if (heroStats) {
     statsObserver.observe(heroStats);
 }
 
+// Language Toggle
+let currentLang = 'da';
+const langToggle = document.getElementById('langToggle');
+
+if (langToggle) {
+    langToggle.addEventListener('click', () => {
+        currentLang = currentLang === 'da' ? 'en' : 'da';
+        langToggle.textContent = currentLang === 'da' ? 'EN' : 'DA';
+        updateLanguage();
+    });
+}
+
+function updateLanguage() {
+    document.querySelectorAll('[data-da][data-en]').forEach(element => {
+        const text = element.getAttribute(`data-${currentLang}`);
+        if (text) {
+            element.textContent = text;
+        }
+    });
+}
+
 // Console message for developers
 console.log('%c🚀 AI PhotoModel', 'color: #6366f1; font-size: 24px; font-weight: bold;');
 console.log('%cRevolutionering produktfotografering med AI', 'color: #64748b; font-size: 14px;');
