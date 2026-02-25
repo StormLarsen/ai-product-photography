@@ -130,5 +130,5 @@ function updateLanguage() {
 }
 
 // Console message for developers
-console.log('%c🚀 AI PhotoModel', 'color: #6366f1; font-size: 24px; font-weight: bold;');
+console.log('%cAI PhotoModel', 'color: #6366f1; font-size: 24px; font-weight: bold;');
 console.log('%cRevolutionering produktfotografering med AI', 'color: #64748b; font-size: 14px;');
