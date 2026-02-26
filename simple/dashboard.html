@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - AI PhotoModel</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f5f5f0;
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background: white;
+            border-bottom: 1px solid #d4d4d4;
+            padding: 1.5rem 0;
+        }
+
+        .nav-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #000;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .user-menu {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .user-name {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .logout-btn {
+            background: none;
+            border: 1px solid #000;
+            padding: 0.5rem 1rem;
+            color: #000;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: all 0.3s;
+        }
+
+        .logout-btn:hover {
+            background: #000;
+            color: white;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .placeholder-container {
+            background: white;
+            border: 2px dashed #d4d4d4;
+            padding: 6rem 3rem;
+            text-align: center;
+            min-height: 500px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .placeholder-icon {
+            font-size: 5rem;
+            opacity: 0.3;
+        }
+
+        .placeholder-title {
+            font-size: 2rem;
+            font-weight: 500;
+            color: #000;
+            margin-bottom: 0.5rem;
+        }
+
+        .placeholder-text {
+            color: #666;
+            font-size: 1.1rem;
+            max-width: 600px;
+            line-height: 1.8;
+        }
+
+        .coming-soon-badge {
+            display: inline-block;
+            background: #000;
+            color: white;
+            padding: 0.5rem 1.5rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-top: 1rem;
+        }
+
+        .features-list {
+            margin-top: 3rem;
+            text-align: left;
+            max-width: 600px;
+        }
+
+        .features-list h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #000;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .features-list ul {
+            list-style: none;
+            display: grid;
+            gap: 1rem;
+        }
+
+        .features-list li {
+            color: #666;
+            padding-left: 1.5rem;
+            position: relative;
+            font-size: 0.95rem;
+        }
+
+        .features-list li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: #000;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-content">
+            <div class="logo">AI PhotoModel</div>
+            <div class="user-menu">
+                <span class="user-name">Velkommen!</span>
+                <button class="logout-btn" onclick="logout()">Log Ud</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="placeholder-container">
+            <div class="placeholder-icon">📸</div>
+            <h1 class="placeholder-title">Dit Dashboard Er Under Udvikling</h1>
+            <p class="placeholder-text">
+                Vi arbejder hårdt på at bygge den mest intuitive platform til AI-drevne tøj photoshoots. 
+                Snart vil du kunne designe modeller, uploade tøj, vælge scener og generere professionelle photoshoots direkte herfra.
+            </p>
+            <span class="coming-soon-badge">Kommer Snart</span>
+
+            <div class="features-list">
+                <h3>Kommende Features:</h3>
+                <ul>
+                    <li>Design dine egne AI-modeller (ansigt, hudfarve, pose, kropsbygning)</li>
+                    <li>Upload dit tøj og se det på modellerne med ét klik</li>
+                    <li>Vælg mellem tusindvis af locations og fotostile</li>
+                    <li>Fuld kontrol over belysning, kameravinkler og komposition</li>
+                    <li>Bulk-generering af hundredvis af photoshoots på minutter</li>
+                    <li>Gem og genbrug dine favorit modeller til fremtidige kampagner</li>
+                    <li>Download i høj opløsning (op til 8K kvalitet)</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function logout() {
+            // In real app, this would clear auth tokens
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>
