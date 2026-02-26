@@ -209,63 +209,82 @@
         .back-link a:hover {
             opacity: 0.7;
         }
+
+        .lang-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #000;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: all 0.3s;
+        }
+
+        .lang-toggle:hover {
+            background: #333;
+        }
     </style>
 </head>
 <body>
+    <button id="langToggle" class="lang-toggle" onclick="toggleLanguage()">EN</button>
     <div class="auth-container">
         <div class="logo">AI PhotoModel</div>
-        <p class="tagline">Professionelle tøj photoshoots med AI</p>
+        <p class="tagline" data-da="Professionelle tøj photoshoots med AI" data-en="Professional fashion photoshoots with AI">Professionelle tøj photoshoots med AI</p>
 
         <div class="tabs">
-            <button class="tab active" onclick="switchTab('signup')">Opret Konto</button>
-            <button class="tab" onclick="switchTab('login')">Log Ind</button>
+            <button class="tab active" onclick="switchTab('signup')" data-da="Opret Konto" data-en="Create Account">Opret Konto</button>
+            <button class="tab" onclick="switchTab('login')" data-da="Log Ind" data-en="Log In">Log Ind</button>
         </div>
 
         <!-- Signup Form -->
         <div id="signup-form" class="form-content active">
             <form onsubmit="handleSignup(event)">
                 <div class="form-group">
-                    <label for="signup-name">Navn</label>
+                    <label for="signup-name" data-da="Navn" data-en="Name">Navn</label>
                     <input type="text" id="signup-name" required>
                 </div>
                 <div class="form-group">
-                    <label for="signup-email">Email</label>
+                    <label for="signup-email" data-da="Email" data-en="Email">Email</label>
                     <input type="email" id="signup-email" required>
                 </div>
                 <div class="form-group">
-                    <label for="signup-password">Password</label>
+                    <label for="signup-password" data-da="Password" data-en="Password">Password</label>
                     <div class="password-wrapper">
                         <input type="password" id="signup-password" required minlength="6">
-                        <button type="button" class="password-toggle" onclick="togglePassword('signup-password')">Vis</button>
+                        <button type="button" class="password-toggle" onclick="togglePassword('signup-password')" data-da-show="Vis" data-en-show="Show" data-da-hide="Skjul" data-en-hide="Hide">Vis</button>
                     </div>
                 </div>
-                <button type="submit" class="btn">Opret Konto</button>
+                <button type="submit" class="btn" data-da="Opret Konto" data-en="Create Account">Opret Konto</button>
             </form>
-            <p class="note">
-                Ved at oprette en konto accepterer du vores vilkår og betingelser.
-            </p>
+            <p class="note" data-da="Ved at oprette en konto accepterer du vores vilkår og betingelser." data-en="By creating an account you accept our terms and conditions.">Ved at oprette en konto accepterer du vores vilkår og betingelser.</p>
         </div>
 
         <!-- Login Form -->
         <div id="login-form" class="form-content">
             <form onsubmit="handleLogin(event)">
                 <div class="form-group">
-                    <label for="login-email">Email</label>
+                    <label for="login-email" data-da="Email" data-en="Email">Email</label>
                     <input type="email" id="login-email" required>
                 </div>
                 <div class="form-group">
-                    <label for="login-password">Password</label>
+                    <label for="login-password" data-da="Password" data-en="Password">Password</label>
                     <div class="password-wrapper">
                         <input type="password" id="login-password" required>
-                        <button type="button" class="password-toggle" onclick="togglePassword('login-password')">Vis</button>
+                        <button type="button" class="password-toggle" onclick="togglePassword('login-password')" data-da-show="Vis" data-en-show="Show" data-da-hide="Skjul" data-en-hide="Hide">Vis</button>
                     </div>
                 </div>
-                <button type="submit" class="btn">Log Ind</button>
+                <button type="submit" class="btn" data-da="Log Ind" data-en="Log In">Log Ind</button>
             </form>
         </div>
 
         <div class="back-link">
-            <a href="index.html">← Tilbage til forsiden</a>
+            <a href="index.html" data-da="← Tilbage til forsiden" data-en="← Back to homepage">← Tilbage til forsiden</a>
         </div>
     </div>
 
@@ -297,14 +316,40 @@
         function togglePassword(inputId) {
             const input = document.getElementById(inputId);
             const button = event.target;
+            const currentLang = document.documentElement.lang;
             
             if (input.type === 'password') {
                 input.type = 'text';
-                button.textContent = 'Skjul';
+                button.textContent = currentLang === 'da' ? button.getAttribute('data-da-hide') : button.getAttribute('data-en-hide');
             } else {
                 input.type = 'password';
-                button.textContent = 'Vis';
+                button.textContent = currentLang === 'da' ? button.getAttribute('data-da-show') : button.getAttribute('data-en-show');
             }
+        }
+
+        let currentLang = 'da';
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'da' ? 'en' : 'da';
+            document.documentElement.lang = currentLang;
+            
+            // Update button text
+            document.getElementById('langToggle').textContent = currentLang === 'da' ? 'EN' : 'DA';
+            
+            // Update all elements with data-da and data-en
+            document.querySelectorAll('[data-da][data-en]').forEach(element => {
+                element.textContent = currentLang === 'da' ? element.getAttribute('data-da') : element.getAttribute('data-en');
+            });
+            
+            // Update password toggle buttons
+            document.querySelectorAll('.password-toggle').forEach(button => {
+                const input = document.getElementById(button.getAttribute('onclick').match(/'([^']+)'/)[1]);
+                if (input.type === 'password') {
+                    button.textContent = currentLang === 'da' ? button.getAttribute('data-da-show') : button.getAttribute('data-en-show');
+                } else {
+                    button.textContent = currentLang === 'da' ? button.getAttribute('data-da-hide') : button.getAttribute('data-en-hide');
+                }
+            });
         }
     </script>
 </body>

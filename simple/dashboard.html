@@ -157,6 +157,23 @@
             color: #000;
             font-weight: bold;
         }
+
+        .lang-toggle {
+            background: #000;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: all 0.3s;
+        }
+
+        .lang-toggle:hover {
+            background: #333;
+        }
     </style>
 </head>
 <body>
@@ -164,8 +181,9 @@
         <div class="nav-content">
             <div class="logo">AI PhotoModel</div>
             <div class="user-menu">
-                <span class="user-name">Velkommen!</span>
-                <button class="logout-btn" onclick="logout()">Log Ud</button>
+                <button id="langToggle" class="lang-toggle" onclick="toggleLanguage()">EN</button>
+                <span class="user-name" data-da="Velkommen!" data-en="Welcome!">Velkommen!</span>
+                <button class="logout-btn" onclick="logout()" data-da="Log Ud" data-en="Log Out">Log Ud</button>
             </div>
         </div>
     </nav>
@@ -173,32 +191,47 @@
     <div class="container">
         <div class="placeholder-container">
             <div class="placeholder-icon">📸</div>
-            <h1 class="placeholder-title">Dit Dashboard Er Under Udvikling</h1>
-            <p class="placeholder-text">
+            <h1 class="placeholder-title" data-da="Dit Dashboard Er Under Udvikling" data-en="Your Dashboard Is Under Development">Dit Dashboard Er Under Udvikling</h1>
+            <p class="placeholder-text" data-da="Vi arbejder hårdt på at bygge den mest intuitive platform til AI-drevne tøj photoshoots. Snart vil du kunne designe modeller, uploade tøj, vælge scener og generere professionelle photoshoots direkte herfra." data-en="We're working hard to build the most intuitive platform for AI-powered fashion photoshoots. Soon you'll be able to design models, upload clothing, choose scenes and generate professional photoshoots directly from here.">
                 Vi arbejder hårdt på at bygge den mest intuitive platform til AI-drevne tøj photoshoots. 
                 Snart vil du kunne designe modeller, uploade tøj, vælge scener og generere professionelle photoshoots direkte herfra.
             </p>
-            <span class="coming-soon-badge">Kommer Snart</span>
+            <span class="coming-soon-badge" data-da="Kommer Snart" data-en="Coming Soon">Kommer Snart</span>
 
             <div class="features-list">
-                <h3>Kommende Features:</h3>
+                <h3 data-da="Kommende Features:" data-en="Upcoming Features:">Kommende Features:</h3>
                 <ul>
-                    <li>Design dine egne AI-modeller (ansigt, hudfarve, pose, kropsbygning)</li>
-                    <li>Upload dit tøj og se det på modellerne med ét klik</li>
-                    <li>Vælg mellem tusindvis af locations og fotostile</li>
-                    <li>Fuld kontrol over belysning, kameravinkler og komposition</li>
-                    <li>Bulk-generering af hundredvis af photoshoots på minutter</li>
-                    <li>Gem og genbrug dine favorit modeller til fremtidige kampagner</li>
-                    <li>Download i høj opløsning (op til 8K kvalitet)</li>
+                    <li data-da="Design dine egne AI-modeller (ansigt, hudfarve, pose, kropsbygning)" data-en="Design your own AI models (face, skin tone, pose, body type)">Design dine egne AI-modeller (ansigt, hudfarve, pose, kropsbygning)</li>
+                    <li data-da="Upload dit tøj og se det på modellerne med ét klik" data-en="Upload your clothing and see it on models with one click">Upload dit tøj og se det på modellerne med ét klik</li>
+                    <li data-da="Vælg mellem tusindvis af locations og fotostile" data-en="Choose from thousands of locations and photo styles">Vælg mellem tusindvis af locations og fotostile</li>
+                    <li data-da="Fuld kontrol over belysning, kameravinkler og komposition" data-en="Full control over lighting, camera angles and composition">Fuld kontrol over belysning, kameravinkler og komposition</li>
+                    <li data-da="Bulk-generering af hundredvis af photoshoots på minutter" data-en="Bulk generation of hundreds of photoshoots in minutes">Bulk-generering af hundredvis af photoshoots på minutter</li>
+                    <li data-da="Gem og genbrug dine favorit modeller til fremtidige kampagner" data-en="Save and reuse your favorite models for future campaigns">Gem og genbrug dine favorit modeller til fremtidige kampagner</li>
+                    <li data-da="Download i høj opløsning (op til 8K kvalitet)" data-en="Download in high resolution (up to 8K quality)">Download i høj opløsning (op til 8K kvalitet)</li>
                 </ul>
             </div>
         </div>
     </div>
 
     <script>
+        let currentLang = 'da';
+
         function logout() {
             // In real app, this would clear auth tokens
             window.location.href = 'index.html';
+        }
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'da' ? 'en' : 'da';
+            document.documentElement.lang = currentLang;
+            
+            // Update button text
+            document.getElementById('langToggle').textContent = currentLang === 'da' ? 'EN' : 'DA';
+            
+            // Update all elements with data-da and data-en
+            document.querySelectorAll('[data-da][data-en]').forEach(element => {
+                element.textContent = currentLang === 'da' ? element.getAttribute('data-da') : element.getAttribute('data-en');
+            });
         }
     </script>
 </body>
